@@ -1,0 +1,78 @@
+package prj5;
+
+/**
+ * @author Aidan Barton tonaid
+ * @version 2015.11.18
+ *
+ */
+public class GlyphList 
+{
+	private DLList<Glyph> list;
+	
+	public GlyphList(DLList<Glyph> list)
+	{
+		this.list = list;
+	}
+	
+	
+	public void sortSong()
+	{
+		
+	}
+	
+	public void sortArtist()
+	{
+		
+	}
+	
+	public void sortYear()
+	{
+		
+	}
+	
+	public void sortGenre()
+	{
+		
+	}
+	
+	public void add(Glyph newEntry)
+	{
+		list.add(newEntry);
+	}
+	
+	public boolean remove(Glyph entry)
+	{
+		return list.remove(entry);
+	}
+	
+	public int size()
+	{
+		return list.size();
+	}
+	
+	public boolean isEmpty()
+	{
+		return list.isEmpty();
+	}
+	
+	public boolean equals(Object other)
+	{
+		return list.equals(other);
+	}
+	
+	public Glyph[] toArray()
+	{
+		Glyph[] array = new Glyph[size()];
+		for (int i = 0; i < size(); i++)
+		{
+			array[i] = list.getAtPosition(i);
+		}
+		
+		return array;
+	}
+	
+	public String toString()
+	{
+		return list.toString();
+	}
+}
