@@ -4,6 +4,7 @@ package prj5;
  * @author Aidan Barton tonaid
  * @version 2015.11.17
  * A Double linked list connected with nodes.
+ * @param T Generic data type
  */
 public class DLList<T> 
 {
