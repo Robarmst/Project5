@@ -1,78 +1,325 @@
 package prj5;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * @author Aidan Barton tonaid
  * @version 2015.11.18
- *
+ * A data structure for glyphs
  */
-public class GlyphList 
+public class GlyphList implements Iterable<Glyph>
 {
-	private DLList<Glyph> list;
-	
-	public GlyphList(DLList<Glyph> list)
-	{
-		this.list = list;
-	}
-	
-	
-	public void sortSong()
-	{
-		
-	}
-	
-	public void sortArtist()
-	{
-		
-	}
-	
-	public void sortYear()
-	{
-		
-	}
-	
-	public void sortGenre()
-	{
-		
-	}
-	
-	public void add(Glyph newEntry)
-	{
-		list.add(newEntry);
-	}
-	
-	public boolean remove(Glyph entry)
-	{
-		return list.remove(entry);
-	}
-	
-	public int size()
-	{
-		return list.size();
-	}
-	
-	public boolean isEmpty()
-	{
-		return list.isEmpty();
-	}
-	
-	public boolean equals(Object other)
-	{
-		return list.equals(other);
-	}
-	
-	public Glyph[] toArray()
-	{
-		Glyph[] array = new Glyph[size()];
-		for (int i = 0; i < size(); i++)
-		{
-			array[i] = list.getAtPosition(i);
-		}
-		
-		return array;
-	}
-	
-	public String toString()
-	{
-		return list.toString();
-	}
+    private DLList<Glyph> list;
+    
+    /**
+     * Creates a new glyphList object with the
+     * given list
+     * @param list
+     */
+    public GlyphList()
+    {
+        list = new DLList<Glyph>();
+    }
+    
+    /**
+     * Alphabetize by song name
+     */
+    public void sortSong()
+    {
+        int index = 0;
+        while (index < size())
+        {
+            Glyph current = list.getAtPosition(index);
+            Glyph tempGlyph = current;
+            int compareIndex = index + 1;
+            int tempPos = index;
+            
+            while (compareIndex < size())
+            {
+                Glyph compare = list.getAtPosition(compareIndex);
+                String compareSong = compare.getSong();
+                
+                int dif = tempGlyph.getSong().compareToIgnoreCase(
+                        compareSong);
+                
+                if (dif > 0)
+                {
+                    tempGlyph = compare;
+                    tempPos = compareIndex;
+                }                
+                
+                compareIndex++;
+            }
+            
+            if (tempGlyph != current)
+            {
+                list.remove(tempGlyph);
+                list.add(tempGlyph, index);
+                list.remove(current);
+                list.add(current, tempPos);
+            }
+            
+            index++;
+        }
+    }
+    
+    /**
+     * Sort alphabetically by artist name
+     */
+    public void sortArtist()
+    {
+        int index = 0;
+        while (index < size())
+        {
+            Glyph current = list.getAtPosition(index);
+            Glyph tempGlyph = current;
+            int compareIndex = index + 1;
+            
+            while (compareIndex < size())
+            {
+                Glyph compare = list.getAtPosition(compareIndex);
+                String compareArtist = compare.getArtist();
+                
+                int dif = tempGlyph.getArtist().compareToIgnoreCase(
+                        compareArtist);
+                
+                if (dif > 0)
+                {
+                    tempGlyph = compare;
+                }                
+                
+                compareIndex++;
+            }
+            
+            if (tempGlyph != current)
+            {
+                list.remove(tempGlyph);
+                list.add(tempGlyph, index);
+            }
+            
+            index++;
+        }
+    }
+    
+    /**
+     * Sort sequentially by year
+     */
+    public void sortYear()
+    {
+        int index = 0;
+        while (index < size())
+        {
+            Glyph current = list.getAtPosition(index);
+            Glyph tempGlyph = current;
+            int compareIndex = index + 1;
+            
+            while (compareIndex < size())
+            {
+                Glyph compare = list.getAtPosition(compareIndex);
+                int compareYear = compare.getYear();
+                
+                int dif = tempGlyph.getYear() - compareYear;
+                
+                if (dif > 0)
+                {
+                    tempGlyph = compare;
+                }                
+                
+                compareIndex++;
+            }
+            
+            if (tempGlyph != current)
+            {
+                list.remove(tempGlyph);
+                list.add(tempGlyph, index);
+            }
+            
+            index++;
+        }
+    }
+    
+    /**
+     * Sort alphabetically by genre
+     */
+    public void sortGenre()
+    {
+        int index = 0;
+        while (index < size())
+        {
+            Glyph current = list.getAtPosition(index);
+            Glyph tempGlyph = current;
+            int compareIndex = index + 1;
+            
+            while (compareIndex < size())
+            {
+                Glyph compare = list.getAtPosition(compareIndex);
+                String compareGenre = compare.getGenre();
+                
+                int dif = tempGlyph.getGenre().compareToIgnoreCase(
+                        compareGenre);
+                
+                if (dif > 0)
+                {
+                    tempGlyph = compare;
+                }                
+                
+                compareIndex++;
+            }
+            
+            if (tempGlyph != current)
+            {
+                list.remove(tempGlyph);
+                list.add(tempGlyph, index);
+            }
+            
+            index++;
+        }
+    }
+    
+    /**
+     * Add a a new Glyph to the list
+     * @param newEntry the new glyph to add
+     */
+    public void add(Glyph newEntry)
+    {
+        list.add(newEntry);
+    }
+    
+    /**
+     * Remove the given glyph from the list
+     * @param entry the glyph to remove
+     * @return if it was removed successfully
+     */
+    public boolean remove(Glyph entry)
+    {
+        return list.remove(entry);
+    }
+    
+    /**
+     * Determines the size of the glyph list
+     * @return the size as an integer value
+     */
+    public int size()
+    {
+        return list.size();
+    }
+    
+    /**
+     * Determines if the list is empty
+     * @return true if the list is empty
+     */
+    public boolean isEmpty()
+    {
+        return list.isEmpty();
+    }
+    
+    /**
+     * Determines if this is equal to the given object
+     * @param other the object to compare to
+     * @return true if they are equals
+     */
+    public boolean equals(Object other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+        
+        if (other == this)
+        {
+            return true;
+        }
+        
+        if (other.getClass() != this.getClass())
+        {
+            return false;
+        }
+        
+        return list.equals(((GlyphList) other).list);
+    }
+    
+    /**
+     * Gets an array of the GlyphList
+     * @return an array of glyphs
+     */
+    public Glyph[] toArray()
+    {
+        Glyph[] array = new Glyph[size()];
+        for (int i = 0; i < size(); i++)
+        {
+            array[i] = list.getAtPosition(i);
+        }
+        
+        return array;
+    }
+    
+    /**
+     * Returns the list in a textual form
+     * @return the list in textual form
+     */
+    public String toString()
+    {
+        return list.toString();
+    }
+
+    /**
+     * Creates an iterator for this list
+     * @return the iterator for this list
+     */
+    @Override
+    public Iterator<Glyph> iterator() 
+    {
+        return new GlyphListIterator();
+    }
+    
+    //-----------------------------------------
+    /**
+     * 
+     * @author Aidan Barton tonaid
+     * @version 2015.11.18
+     * 
+     */
+    @SuppressWarnings("hiding")
+    private class GlyphListIterator implements Iterator<Glyph>
+    {
+        private int index;
+        
+        /**
+         * Creates a new iterator object
+         */
+        public GlyphListIterator()
+        {
+            index = 0;
+        }
+        
+        /**
+         * Determines if there is a next glyph
+         * @return true if there is another object
+         *            in the list
+         */
+        @Override
+        public boolean hasNext() {
+            return index < size();
+        }
+
+        /**
+         * Get the next object in the list
+         * @return the next object
+         */
+        @Override
+        public Glyph next() {
+            if (hasNext())
+            {
+                Glyph next = list.getAtPosition(index);
+                index++;
+                return next;
+            }
+            else
+            {
+                throw new NoSuchElementException();
+            }
+        }
+        
+    }
 }
