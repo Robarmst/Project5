@@ -4,7 +4,7 @@ package prj5;
  * @author Aidan Barton tonaid
  * @version 2015.11.17
  * A Double linked list connected with nodes.
- * @param T Generic data type
+ * @param <T> generic data type
  */
 public class DLList<T> 
 {
@@ -67,7 +67,7 @@ public class DLList<T>
      * Add the data to the end of the list
      * @param data the data to add
      */
-    public void    add(T data)
+    public void add(T data)
     {
         add(data, size());
     }
@@ -146,6 +146,7 @@ public class DLList<T>
     
     /**
      * Returns the list in a textual format
+     * @return the list in textual form
      */
     public String toString()
     {
@@ -173,6 +174,8 @@ public class DLList<T>
     
     /**
      * Determines if two object are equals
+     * @param other the object to compare
+     * @return true if the objects are equals
      */
     @SuppressWarnings("unchecked")
     public boolean equals(Object other)
@@ -197,7 +200,7 @@ public class DLList<T>
             return false;
         }
         
-        for (int i = 0; i < size; i ++)
+        for (int i = 0; i < size; i++)
         {
             if (!((DLList<T>) other).getAtPosition(i).equals(
                     getAtPosition(i)))
@@ -245,7 +248,7 @@ public class DLList<T>
      * @author Aidan Barton (tonaid)
      * @version 2015.11.18
      *
-     * @param <T>
+     * @param <T> generic data type
      */
     private class Node<T>
     {
