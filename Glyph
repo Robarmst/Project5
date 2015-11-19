@@ -76,7 +76,7 @@ public class Glyph
      */
     public int getLikes()
     {
-    return likes;    
+        return likes; 
     }
     
     /**
@@ -90,19 +90,23 @@ public class Glyph
     
     /**
      * Return the glyph in a textual form
+     * @return the glyph in a textual format
      */
     public String toString()
     {
-        return song + ", "
+        return "[" +
+                song + ", "
                 + artist + ", "
                 + genre + ", "
                 + year + ", "
                 + likes + ", "
-                + listens;
+                + listens + "]";
     }
     
     /**
      * Determines if this is equal to the given object
+     * @param other the object you are comparing
+     * @return true if the objects are equals
      */
     public boolean equals(Object other)
     {
@@ -146,11 +150,6 @@ public class Glyph
             return false;
         }
         
-        if (((Glyph) other).getYear() != this.getYear())
-        {
-            return false;
-        }
-        
-        return true;
+        return ((Glyph) other).getYear() == this.getYear();
     }
 }
