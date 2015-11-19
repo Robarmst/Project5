@@ -1,0 +1,320 @@
+package prj5;
+
+/**
+ * @author Aidan Barton tonaid
+ * @version 2015.11.17
+ * A Double linked list connected with nodes.
+ */
+public class DLList<T> 
+{
+    private Node<T> head;
+    private Node<T> tail;
+    private int size;
+    
+    /**
+     * Creates a new empty double linked list
+     */
+    public DLList()
+    {
+        head = new Node<T>(null);
+        tail = new Node<T>(null);
+        size = 0;
+        head.setNext(tail);
+        tail.setPrevious(head);
+    }
+    
+    /**
+     * Get the data at the given position in
+     * the list
+     * @param pos the position to get
+     * @return the data from that position
+     */
+    public T getAtPosition(int pos)
+    {
+        if (pos > size || pos < 0)
+        {
+            throw new IllegalStateException("That position is out of bounds");
+        }
+        
+        Node<T> returnNode = getNodeAtPosition(pos);
+        return returnNode.data();
+    }
+    
+    /**
+     * Helper method that gets a node at the given
+     * position
+     * @param pos the position to find
+     */
+    private Node<T> getNodeAtPosition(int pos)
+    {
+        Node<T> returnNode = head.next;
+        
+        if (pos > size || pos < 0)
+        {
+            throw new IllegalStateException("That position is out of bounds");
+        }
+        
+        for (int i = 0; i < pos; i++)
+        {
+            returnNode = returnNode.next();
+        }
+        
+        return returnNode;
+    }
+    
+    /**
+     * Add the data to the end of the list
+     * @param data the data to add
+     */
+    public void    add(T data)
+    {
+        add(data, size());
+    }
+    
+    /**
+     * Add the new data to the given position
+     * @param data the data to put in the list
+     * @param pos the position to place the data
+     */
+    public void add(T data, int pos)
+    {
+        if (data == null)
+        {
+            throw new IllegalArgumentException("Cannot add a null object");
+        }
+        
+        Node<T> nextNode = getNodeAtPosition(pos);
+        Node<T> prevNode = nextNode.previous();
+        Node<T> newNode = new Node<T>(data);
+        
+        newNode.setNext(nextNode);
+        newNode.setPrevious(prevNode);
+        prevNode.setNext(newNode);
+        nextNode.setPrevious(newNode);
+        size++;
+        
+    }
+    
+    /**
+     * Removes the given objects
+     * @param obj the object to remove
+     * @return true if the object was removed
+     *            false otherwise.
+     */
+    public boolean remove(T obj)
+    {
+        if (isEmpty())
+        {
+            return false;
+        }
+        
+        Node<T> currentNode = head.next;
+        boolean found = false;
+            
+        while (!found && currentNode != tail)
+        {
+            found = currentNode.data().equals(obj);
+            currentNode = currentNode.next();
+        }
+        
+        currentNode = currentNode.previous();
+        
+        if (found)
+        {
+            Node<T> previous = currentNode.previous();
+            Node<T> next = currentNode.next();
+            previous.setNext(next);
+            next.setPrevious(previous);
+            size--;
+        }
+        
+        return found;
+    }
+    
+    /**
+     * Remove the object at the given position
+     * @param pos the position to remove the object from
+     * @return the data
+     */
+    public T remove(int pos)
+    {        
+        Node<T> tempNode = getNodeAtPosition(pos);
+        remove(tempNode.data());
+        return tempNode.data();
+    }
+    
+    /**
+     * Returns the list in a textual format
+     */
+    public String toString()
+    {
+        Node<T> currentNode = head.next();
+        String str = "";
+        
+        if (! isEmpty())
+        {
+            
+            while (currentNode != tail)
+            {
+                str += currentNode.data().toString();
+                
+                currentNode = currentNode.next();
+                
+                if (currentNode != tail)
+                {
+                    str += ", ";
+                }
+            }
+        }
+        
+        return "[" + str + "]";
+    }
+    
+    /**
+     * Determines if two object are equals
+     */
+    @SuppressWarnings("unchecked")
+    public boolean equals(Object other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+        
+        if (other == this)
+        {
+            return true;
+        }
+        
+        if (other.getClass() != this.getClass())
+        {
+            return false;
+        }
+        
+        if (((DLList<T>) other).size() != this.size())
+        {
+            return false;
+        }
+        
+        for (int i = 0; i < size; i ++)
+        {
+            if (!((DLList<T>) other).getAtPosition(i).equals(
+                    getAtPosition(i)))
+            {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    /**
+     * Empties the list
+     */
+    public void clear()
+    {
+        head = new Node<T>(null);
+        tail = new Node<T>(null);
+        size = 0;
+        head.setNext(tail);
+        tail.setPrevious(head);
+    }
+    
+    /**
+     * Return the size of the list
+     * @return the size of the list
+     */
+    public int size()
+    {
+        return size;
+    }
+    
+    /**
+     * Determines if the list is empty
+     * @return true if the list is empty
+     */
+    public boolean isEmpty()
+    {
+        return size == 0;
+    } 
+    
+    // -----------------------------------------------------
+    /**
+     * 
+     * @author Aidan Barton (tonaid)
+     * @version 2015.11.18
+     *
+     * @param <T>
+     */
+    private class Node<T>
+    {
+        private Node<T> next;
+        private Node<T> previous;
+        private T data;
+        
+        /**
+         * Creates a new node object
+         * @param data The data contained in the node
+         */
+        public Node(T data)
+        {
+            next = null;
+            previous = null;
+            this.data = data;
+        }
+        
+        /**
+         * Set the given node to this nodes next
+         * @param newNext the node to set as next
+         */
+        public void setNext(Node<T> newNext)
+        {
+            next = newNext;
+        }
+        
+        /**
+         * Set the given node to this nodes previous
+         * @param newPrevious The node to be set as the previous
+         */
+        public void setPrevious(Node<T> newPrevious)
+        {
+            previous = newPrevious;
+        }
+        
+        /**
+         * Gets the next node in the chain
+         * @return the next node
+         */
+        public Node<T> next()
+        {
+            return next;
+        }
+        
+        /**
+         * Gets the previous node in the chain
+         * @return the previous node
+         */
+        public Node<T> previous()
+        {
+            return previous;
+        }
+        
+        /**
+         * Gets the data in the node
+         * @return the data in the node
+         */
+        public T data()
+        {
+            return data;
+        }
+        
+        /**
+         * Sets this nodes data to the given data
+         * @param newData is the data to set to
+         */
+        public void setData(T newData)
+        {
+            data = newData;
+        }
+    }
+}
