@@ -3,6 +3,8 @@ package prj5;
 /**
  * @author Aidan Barton tonaid
  * @version 2015.11.18
+ * The glyph data type is what hold the
+ * song data
  */
 public class Glyph 
 {
