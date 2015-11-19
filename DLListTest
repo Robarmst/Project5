@@ -1,0 +1,293 @@
+package prj5;
+
+import student.TestCase;
+
+/**
+ * @author Aidan Barton tonaid
+ * @version 2015.11.18
+ *
+ */
+public class DLListTest extends TestCase
+{
+    private DLList<String> list;
+    
+    /**
+     * Set up the test conditions
+     */
+    public void setUp()
+    {
+        list = new DLList<String>();
+    }
+    
+    /**
+     * Test the add(T data) method
+     */
+    public void testAddData()
+    {
+        list.add("hello");
+        assertEquals(1, list.size());
+        assertEquals("[hello]", list.toString());
+        
+        list.add("noop");
+        list.add("9001");
+        assertEquals(3, list.size());
+        assertEquals("[hello, noop, 9001]", list.toString());
+        
+        String nullStr = null;
+        Exception sample = new IllegalArgumentException();
+        
+        try
+        {
+            list.add(nullStr);
+        }
+        catch (Exception e)
+        {
+            assertEquals(sample.getClass(), e.getClass());
+        }
+    }
+    
+    
+    /**
+     * Test the add(data,pos) method
+     */
+    public void testAddDataPos()
+    {
+        String nullStr = null;
+        Exception sample = new IllegalArgumentException();
+        
+        try
+        {
+            list.add(nullStr, 0);
+        }
+        catch (Exception e)
+        {
+            assertEquals(sample.getClass(), e.getClass());
+        }
+        
+        sample = new IllegalStateException();
+        try
+        {
+            list.add("what", 3);
+        }
+        catch (Exception e)
+        {
+            assertEquals(sample.getClass(), e.getClass());
+        }
+        
+        try
+        {
+            list.add("what", -1);
+        }
+        catch (Exception e)
+        {
+            assertEquals(sample.getClass(), e.getClass());
+        }
+        
+        list.add("what", 0);
+        list.add("the", 0);
+        list.add("3", 2);
+        assertEquals("[the, what, 3]", list.toString());
+    }
+    
+    /**
+     * Test the remove object method
+     * Removes the given object
+     */
+    public void testRemoveObj()
+    {
+        assertFalse(list.remove("booty"));
+        
+        list.add("pink");
+        list.add("idc");
+        list.add("wewewe");
+        list.add("666");
+        //System.out.println(list.toString());
+        assertFalse(list.remove("ars"));
+        
+        assertTrue(list.remove("wewewe"));
+        //System.out.println(list.toString());
+        assertTrue(list.remove("idc"));
+        //System.out.println(list.toString());
+        assertTrue(list.remove("666"));
+        //System.out.println(list.toString());
+        assertTrue(list.remove("pink"));
+        //System.out.println(list.toString());
+    }
+    
+    /**
+     * test the remove(pos) method.
+     * It removes the object at the given position
+     * and returns the data contained in it.
+     */
+    public void testRemovePos()
+    {
+        Exception sample = new IllegalStateException();
+        try
+        {
+            list.remove(3);
+        }
+        catch (Exception e)
+        {
+            assertEquals(sample.getClass(), e.getClass());
+        }
+        
+        try
+        {
+            list.remove(-1);
+        }
+        catch (Exception e)
+        {
+            assertEquals(sample.getClass(), e.getClass());
+        }
+        
+        list.add("pink");
+        list.add("idc");
+        list.add("wewewe");
+        list.add("666");
+        
+        assertEquals("idc", list.remove(1));
+        assertEquals("666", list.remove(2));
+        assertEquals("pink", list.remove(0));
+        assertEquals("wewewe", list.remove(0));
+    }
+    
+    /**
+     * Test the getAtPos Method.
+     * Returns the data of the node at
+     * the given position
+     */
+    public void testGetAtPos()
+    {
+        Exception sample = new IllegalStateException();
+        try
+        {
+            list.getAtPosition(3);
+        }
+        catch (Exception e)
+        {
+            assertEquals(sample.getClass(), e.getClass());
+        }
+        
+        try
+        {
+            list.getAtPosition(-1);
+        }
+        catch (Exception e)
+        {
+            assertEquals(sample.getClass(), e.getClass());
+        }
+        
+        list.add("pink");
+        list.add("idc");
+        list.add("wewewe");
+        list.add("666");
+        
+        assertEquals("pink", list.getAtPosition(0));
+        assertEquals("666", list.getAtPosition(3));
+    }
+    
+    /**
+     * Test the toString method
+     */
+    public void testToString()
+    {
+        assertEquals("[]", list.toString());
+        
+        list.add("pink");
+        list.add("idc");
+        list.add("wewewe");
+        list.add("666");
+        
+        assertEquals("[pink, idc, wewewe, 666]", list.toString());
+    }
+    
+    /**
+     * test the equals method
+     * determines if two lists are equals
+     */
+    public void testEquals()
+    {
+        list.add("pink");
+        list.add("idc");
+        list.add("wewewe");
+        list.add("666");
+        
+        DLList<String> sameList = new DLList<String>();
+        sameList.add("pink");
+        sameList.add("idc");
+        sameList.add("wewewe");
+        sameList.add("666");
+        
+        DLList<Integer> difListType = new DLList<Integer>();
+        difListType.add(1);
+        difListType.add(2);
+        difListType.add(3);
+        difListType.add(4);
+        
+        DLList<String> difListLength = new DLList<String>();
+        difListLength.add("pink");
+        difListLength.add("idc");
+        difListLength.add("wewewe");
+        
+        String nullStr = null;
+        
+        assertTrue(list.equals(list));
+        assertTrue(list.equals(sameList));
+        assertFalse(list.equals(nullStr));
+        assertFalse(list.equals(difListType));
+        assertFalse(list.equals(difListLength));
+        
+    }
+    
+    /**
+     * test the clear method
+     * empties the list
+     */
+    public void testClear()
+    {
+        list.add("pink");
+        list.add("idc");
+        list.add("wewewe");
+        list.add("666");
+        
+        list.clear();
+        assertEquals(0, list.size());
+    }
+    
+    /**
+     * test the size method
+     * returns the size of the method
+     */
+    public void testSize()
+    {
+        assertEquals(0, list.size());
+        
+        for (int i = 0; i < 20; i++)
+        {
+            list.add(String.valueOf(i));
+        }
+        
+        assertEquals(20, list.size());
+        
+        for (int i = 0; i < 15; i++)
+        {
+            list.remove(0);
+        }
+        
+        assertEquals(5, list.size());
+    }
+    
+    /**
+     * test the isEmpty method
+     * should return true if the
+     * list is empty, false otherwise
+     */
+    public void testIsEmpty()
+    {
+        assertTrue(list.isEmpty());
+        list.add("h");
+        assertFalse(list.isEmpty());
+        list.remove(0);
+        assertTrue(list.isEmpty());
+    }
+}
