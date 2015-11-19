@@ -93,7 +93,6 @@ public class DLList<T>
         prevNode.setNext(newNode);
         nextNode.setPrevious(newNode);
         size++;
-        
     }
     
     /**
