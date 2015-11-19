@@ -1,0 +1,54 @@
+/**
+ * 
+ */
+package prj5;
+
+import student.TestCase;
+
+/**
+ * @author Todd Parker
+ *
+ */
+public class StudentTest extends TestCase {
+    private Student student;
+    
+    /**
+     * Sets up the commonalities of the tests
+     */
+    public void setUp()
+    {
+        student = new Student(0, 2, 1);
+    }
+    
+    /**
+     * Tests the getter methods
+     */
+    public void testGetterMethods()
+    {
+        assertEquals(0, student.getHobby());
+        assertEquals(2, student.getRegion());
+        assertEquals(1, student.getMajor());
+        assertTrue(student.getAnswers().isEmpty());
+    }
+    
+    /**
+     * Test the addSongData Method
+     */
+    public void testAdd()
+    {
+        assertTrue(student.getAnswers().isEmpty());
+        student.addSongData("Jukebox Hero", 1);
+        assertFalse(student.getAnswers().isEmpty());
+        assertEquals(student.getAnswers().getLength(), 1);
+        student.addSongData("Rock the Casbah", 0);
+        assertEquals(student.getAnswers().getLength(), 2);
+        assertTrue(student.getAnswers().getEntry(0).getSong().equals(
+            "Jukebox Hero"));
+        assertEquals(1, student.getAnswers().getEntry(0).getLiked());
+        assertTrue(student.getAnswers().getEntry(1).getSong().equals(
+            "Rock the Casbah"));
+        assertEquals(0, student.getAnswers().getEntry(1).getLiked());
+    }
+    
+    
+}
