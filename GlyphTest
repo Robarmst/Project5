@@ -1,0 +1,84 @@
+package prj5;
+
+import student.TestCase;
+
+/**
+ * @author Aidan Barton tonaid
+ * @version 2015.11.18
+ *
+ */
+public class GlyphTest extends TestCase
+{
+    private Glyph glyph;
+    private Glyph sameGlyph;
+    private Glyph listenGlyph;
+    private Glyph likesGlyph;
+    private Glyph artistGlyph;
+    private Glyph songGlyph;
+    private Glyph genreGlyph;
+    private Glyph yearGlyph;
+    
+    public void setUp()
+    {
+        glyph = new Glyph("song", "artist", "genre", 666, 420, 69);
+        sameGlyph = new Glyph("song", "artist", "genre", 666, 420, 69);
+        listenGlyph = new Glyph("song", "artist", "genre", 666, 420, 9);
+        likesGlyph = new Glyph("song", "artist", "genre", 666, 40, 69);
+        artistGlyph = new Glyph("song", "ast", "genre", 666, 420, 69);
+        songGlyph = new Glyph("sg", "artist", "genre", 666, 420, 69);
+        genreGlyph = new Glyph("song", "artist", "gee", 666, 420, 69);
+        yearGlyph = new Glyph("song", "artist", "genre", 6, 420, 69);
+    }
+    
+    public void testGetSong()
+    {
+        assertEquals("song", glyph.getSong());
+    }
+    
+    public void testGetArtist()
+    {
+        assertEquals("artist", glyph.getArtist());
+    }
+    
+    public void testGetGenre()
+    {
+        assertEquals("genre", glyph.getGenre());
+    }
+    
+    public void testGetYear()
+    {
+        assertEquals(666, glyph.getYear());
+    }
+    
+    public void testGetLikes()
+    {
+        assertEquals(420, glyph.getLikes());
+    }
+    
+    public void testGetListens()
+    {
+        assertEquals(69, glyph.getListens());
+    }
+    
+    public void testToString()
+    {
+        assertEquals("song, artist, genre, 666, 420, 69", 
+                glyph.toString());
+    }
+    
+    public void testEquals()
+    {
+        int whhhhhat = 69420;
+        String nullStr = null;
+        assertTrue(glyph.equals(glyph));
+        assertTrue(glyph.equals(sameGlyph));
+        assertFalse(glyph.equals(nullStr));
+        assertFalse(glyph.equals(whhhhhat));
+        assertFalse(glyph.equals(artistGlyph));
+        assertFalse(glyph.equals(songGlyph));
+        assertFalse(glyph.equals(genreGlyph));
+        assertFalse(glyph.equals(yearGlyph));
+        assertFalse(glyph.equals(likesGlyph));
+        assertFalse(glyph.equals(listenGlyph));
+    }
+}

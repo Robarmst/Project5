@@ -1,0 +1,156 @@
+package prj5;
+
+/**
+ * @author Aidan Barton tonaid
+ * @version 2015.11.18
+ */
+public class Glyph 
+{
+    private String song;
+    private String artist;
+    private String genre;
+    private int year;
+    private int likes;
+    private int listens;
+    
+    /**
+     * Creates a new Glyph object with the given
+     * parameters
+     * @param song The title of the song
+     * @param artist The name of the artist
+     * @param genre The genre of the song
+     * @param year The year the song was made
+     * @param likes The number of likes it has
+     * @param listens The number of listens it has
+     */
+    public Glyph(String song, String artist, String genre, 
+            int year, int likes, int listens)
+    {
+        this.song = song;
+        this.artist = artist;
+        this.genre = genre;
+        this.year = year;
+        this.likes = likes;
+        this.listens = listens;
+    }
+    
+    /**
+     * Retrieves the song of the glyph.
+     * @return the song
+     */
+    public String getSong()
+    {
+        return song;
+    }
+    
+    /**
+     * Retrieves the artists of the glyph.
+     * @return the artist
+     */
+    public String getArtist()
+    {
+        return artist;
+    }
+    
+    /**
+     * Retrieves the genre of the glyph.
+     * @return the genre
+     */
+    public String getGenre()
+    {
+        return genre;
+    }
+    
+    /**
+     * Retrieves the year of the glyph.
+     * @return the year
+     */
+    public int getYear()
+    {
+        return year;
+    }
+    
+    /**
+     * Retrieves the likes of the glyph.
+     * @return the likes
+     */
+    public int getLikes()
+    {
+    return likes;    
+    }
+    
+    /**
+     * Retrieves the listens of the glyph.
+     * @return the listens
+     */
+    public int getListens()
+    {
+        return listens;
+    }
+    
+    /**
+     * Return the glyph in a textual form
+     */
+    public String toString()
+    {
+        return song + ", "
+                + artist + ", "
+                + genre + ", "
+                + year + ", "
+                + likes + ", "
+                + listens;
+    }
+    
+    /**
+     * Determines if this is equal to the given object
+     */
+    public boolean equals(Object other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+        
+        if (other == this)
+        {
+            return true;
+        }
+        
+        if (other.getClass() != this.getClass())
+        {
+            return false;    
+        }
+        
+        if (((Glyph) other).getArtist() != this.getArtist())
+        {
+            return false;
+        }
+        
+        if (((Glyph) other).getSong() != this.getSong())
+        {
+            return false;
+        }
+        
+        if (((Glyph) other).getLikes() != this.getLikes())
+        {
+            return false;
+        }
+        
+        if (((Glyph) other).getGenre() != this.getGenre())
+        {
+            return false;
+        }
+        
+        if (((Glyph) other).getListens() != this.getListens())
+        {
+            return false;
+        }
+        
+        if (((Glyph) other).getYear() != this.getYear())
+        {
+            return false;
+        }
+        
+        return true;
+    }
+}
