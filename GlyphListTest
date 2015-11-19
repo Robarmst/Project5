@@ -1,0 +1,245 @@
+/**
+ * 
+ */
+package prj5;
+
+import java.util.Iterator;
+
+import student.TestCase;
+
+/**
+ * @author Aidan Barton tonaid
+ * @version 2015.11.19
+ * GlyphList test class
+ */
+public class GlyphListTest extends TestCase
+{
+    private GlyphList list;
+    
+    /**
+     * setup the test conditions.
+     */
+    public void setUp()
+    {
+        list = new GlyphList();        
+    }
+    
+    /**
+     * Test the sortSong method
+     * Sorts the songs alphabetically by
+     * song name
+     */
+    public void testSortSong()
+    {
+        list.add(new Glyph("F", "artist", "genre", 1, 2, 3));
+        list.add(new Glyph("A", "ist", "genre", 1, 2, 3));
+        list.add(new Glyph("D", "artist", "genre", 1, 2, 3));
+        list.add(new Glyph("C", "artt", "genre", 1, 2, 3));
+        list.add(new Glyph("E", "artist", "genre", 1, 2, 3));
+        list.add(new Glyph("Z", "artist", "genre", 1, 2, 3));
+                
+        list.sortSong();
+        assertEquals("[[A, ist, genre, 1, 2, 3], "
+                + "[C, artt, genre, 1, 2, 3], "
+                + "[D, artist, genre, 1, 2, 3], "
+                + "[E, artist, genre, 1, 2, 3], "
+                + "[F, artist, genre, 1, 2, 3], "
+                + "[Z, artist, genre, 1, 2, 3]]",
+                list.toString());
+    }
+    
+    /**
+     * Test the sortArtist method.
+     * Should alphabetize by artist
+     */
+    public void testSortArtist()
+    {
+        list.add(new Glyph("song", "D", "genre", 1, 2, 3));
+        list.add(new Glyph("song", "A", "genre", 1, 2, 3));
+        list.add(new Glyph("song", "Z", "genre", 1, 2, 3));
+        list.add(new Glyph("song", "F", "genre", 1, 2, 3));
+        list.add(new Glyph("song", "E", "genre", 1, 2, 3));
+        list.add(new Glyph("song", "P", "genre", 1, 2, 3));
+                
+        list.sortArtist();
+        assertEquals("[[song, A, genre, 1, 2, 3], "
+                + "[song, D, genre, 1, 2, 3], "
+                + "[song, E, genre, 1, 2, 3], "
+                + "[song, F, genre, 1, 2, 3], "
+                + "[song, P, genre, 1, 2, 3], "
+                + "[song, Z, genre, 1, 2, 3]]"
+                , list.toString());
+    }
+    
+    /**
+     * Test the sortGenre.
+     * Should alphabetize by genre.
+     */
+    public void testSortGenre()
+    {
+        list.add(new Glyph("song", "artist", "X", 1, 2, 3));
+        list.add(new Glyph("song", "artist", "A", 1, 2, 3));
+        list.add(new Glyph("song", "artist", "F", 1, 2, 3));
+        list.add(new Glyph("song", "artist", "D", 1, 2, 3));
+        list.add(new Glyph("song", "artist", "B", 1, 2, 3));
+        list.add(new Glyph("song", "artist", "C", 1, 2, 3));
+                
+        list.sortGenre();
+        assertEquals("[[song, artist, A, 1, 2, 3], "
+                + "[song, artist, B, 1, 2, 3], "
+                + "[song, artist, C, 1, 2, 3], "
+                + "[song, artist, D, 1, 2, 3], "
+                + "[song, artist, F, 1, 2, 3], "
+                + "[song, artist, X, 1, 2, 3]]",
+                list.toString());
+    }
+    
+    /**
+     * Test the sortGenre.
+     * Should alphabetize by genre.
+     */
+    public void testSortYear()
+    {
+        list.add(new Glyph("song", "artist", "X", 2015, 2, 3));
+        list.add(new Glyph("song", "artist", "A", 2013, 2, 3));
+        list.add(new Glyph("song", "artist", "F", 1969, 9, 3));
+        list.add(new Glyph("song", "artist", "D", 1976, 2, 3));
+        list.add(new Glyph("song", "artist", "B", 1999, 2, 3));
+        list.add(new Glyph("song", "artist", "C", 9001, 2, 3));
+        
+        list.sortYear();
+        assertEquals("[[song, artist, F, 1969, 9, 3], "
+                + "[song, artist, D, 1976, 2, 3], "
+                + "[song, artist, B, 1999, 2, 3], "
+                + "[song, artist, A, 2013, 2, 3], "
+                + "[song, artist, X, 2015, 2, 3], "
+                + "[song, artist, C, 9001, 2, 3]]",
+                list.toString());
+    }
+    
+    /**
+     * Test the add method
+     * Should add a glyph to the list
+     */
+    public void testAdd()
+    {
+        list.add(new Glyph("song", "artist", "X", 2015, 2, 3));
+        list.add(new Glyph("song", "artist", "A", 2013, 2, 3));
+        list.add(new Glyph("song", "artist", "F", 1969, 9, 3));
+        list.add(new Glyph("song", "artist", "D", 1976, 2, 3));
+        list.add(new Glyph("song", "artist", "B", 1999, 2, 3));
+        list.add(new Glyph("song", "artist", "C", 9001, 2, 3));
+        
+        assertEquals(6, list.size());
+    }
+    
+    /**
+     * Test the add method
+     * Should add a glyph to the list
+     */
+    public void testRemove()
+    {
+        Glyph c = new Glyph("C", "artist", "genre", 1, 2, 3);
+        Glyph d = new Glyph("D", "artist", "genre", 1, 2, 3);
+        Glyph b = new Glyph("B", "artist", "genre", 1, 2, 3);
+        Glyph a = new Glyph("A", "artist", "genre", 1, 2, 3);
+        list.add(c);
+        list.add(d);
+        list.add(b);
+        list.add(a);
+        
+        list.remove(d);
+        list.remove(a);
+        assertEquals(2, list.size());
+    }
+    
+    /**
+     * Test the isEmpty method
+     */
+    public void testIsEmpty()
+    {
+        Glyph c = new Glyph("C", "artist", "genre", 1, 2, 3);
+        assertTrue(list.isEmpty());
+        list.add(c);
+        assertFalse(list.isEmpty());
+    }
+    
+    /**
+     * Test the equals method
+     * should return true if they are equals
+     */
+    public void testEquals()
+    {
+        Object nullObj = null;
+        Object objClass = new Object();
+        list.add(new Glyph("song", "artist", "D", 1976, 2, 3));
+        list.add(new Glyph("song", "artist", "B", 1999, 2, 3));
+        list.add(new Glyph("song", "artist", "C", 9001, 2, 3));
+        
+        GlyphList difList = new GlyphList();
+        difList.add(new Glyph("song", "artist", "f", 123, 666, 420));
+        
+        GlyphList sameList = new GlyphList();
+        sameList.add(new Glyph("song", "artist", "D", 1976, 2, 3));
+        sameList.add(new Glyph("song", "artist", "B", 1999, 2, 3));
+        sameList.add(new Glyph("song", "artist", "C", 9001, 2, 3));
+        
+        assertTrue(list.equals(list));
+        assertTrue(list.equals(sameList));
+        assertFalse(list.equals(nullObj));
+        assertFalse(list.equals(objClass));
+    }
+    
+    /**
+     * test the toArray method
+     * should return an array of the 
+     * glyphlist
+     */
+    public void testToArray()
+    {
+        Glyph[] array = list.toArray();
+        assertEquals(0, array.length);
+        Glyph c = new Glyph("C", "artist", "genre", 1, 2, 3);
+        Glyph d = new Glyph("D", "artist", "genre", 1, 2, 3);
+        Glyph b = new Glyph("B", "artist", "genre", 1, 2, 3);
+        Glyph a = new Glyph("A", "artist", "genre", 1, 2, 3);
+        list.add(c);
+        list.add(d);
+        list.add(b);
+        list.add(a);
+        
+        Glyph[] glyphArray = {c, d, b, a};
+        array = list.toArray();
+        
+        for (int i = 0; i < array.length; i++)
+        {
+            assertEquals(glyphArray[i], array[i]);
+        }
+    }
+    
+    /**
+     * Test the iterator method.
+     * Should return the iterator for the list
+     */
+    public void testIterator()
+    {
+        Glyph c = new Glyph("C", "artist", "genre", 1, 2, 3);
+        Glyph d = new Glyph("D", "artist", "genre", 1, 2, 3);
+        Glyph b = new Glyph("B", "artist", "genre", 1, 2, 3);
+        Glyph a = new Glyph("A", "artist", "genre", 1, 2, 3);
+        list.add(c);
+        list.add(d);
+        list.add(b);
+        list.add(a);
+        
+        Iterator<Glyph> iter = list.iterator();
+        
+        assertTrue(iter.hasNext());
+        assertEquals(c, iter.next());
+        assertEquals(d, iter.next());
+        assertEquals(b, iter.next());
+        assertEquals(a, iter.next());
+        assertFalse(iter.hasNext());
+        
+    }
+}
