@@ -5,7 +5,7 @@ import student.TestCase;
 /**
  * @author Aidan Barton tonaid
  * @version 2015.11.18
- *
+ * Test the glyph class
  */
 public class GlyphTest extends TestCase
 {
@@ -18,6 +18,9 @@ public class GlyphTest extends TestCase
     private Glyph genreGlyph;
     private Glyph yearGlyph;
     
+    /**
+     * Set up the test conditions
+     */
     public void setUp()
     {
         glyph = new Glyph("song", "artist", "genre", 666, 420, 69);
@@ -30,42 +33,74 @@ public class GlyphTest extends TestCase
         yearGlyph = new Glyph("song", "artist", "genre", 6, 420, 69);
     }
     
+    /**
+     * test the getSong method
+     * should return song
+     */
     public void testGetSong()
     {
         assertEquals("song", glyph.getSong());
     }
     
+    /**
+     * test the getArtist method
+     * should return artist
+     */
     public void testGetArtist()
     {
         assertEquals("artist", glyph.getArtist());
     }
     
+    /**
+     * test the getgenre method
+     * should return genre
+     */
     public void testGetGenre()
     {
         assertEquals("genre", glyph.getGenre());
     }
     
+    /**
+     * test the getYear method
+     * should return the year
+     */
     public void testGetYear()
     {
         assertEquals(666, glyph.getYear());
     }
     
+    /**
+     * test the get likes method
+     * should return the likes
+     */
     public void testGetLikes()
     {
         assertEquals(420, glyph.getLikes());
     }
     
+    /**
+     * test the getListens method
+     * should return the listens
+     */
     public void testGetListens()
     {
         assertEquals(69, glyph.getListens());
     }
     
+    /**
+     * test the toString method
+     * should return the glyph in textual form
+     */
     public void testToString()
     {
-        assertEquals("song, artist, genre, 666, 420, 69", 
+        assertEquals("[song, artist, genre, 666, 420, 69]", 
                 glyph.toString());
     }
     
+    /**
+     * test the equals method
+     * should determine if two objects are equals
+     */
     public void testEquals()
     {
         int whhhhhat = 69420;
