@@ -1,0 +1,173 @@
+/**
+ * 
+ */
+package prj5;
+
+import java.util.Scanner;
+
+import list.AList;
+
+/**
+ * @author Todd Parker (todd5913)
+ * @version 2015.11.19
+ */
+public class Input {
+    private AList<Student> students;
+    private GlyphList glyphs;
+    
+    /**
+     * Creates the input object
+     */
+    public Input()
+    {
+        students = new AList<Student>();
+    }
+    
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        if (args.length != 2)
+        {
+            throw new IllegalArgumentException(
+                "Must have two files as input");
+        }
+        Input input = new Input();
+        input.getResponses(args[0]);
+        input.createGlyphs(args[1]);
+        GUISongWindow window = new GUISongwindow(glyphs);
+    }
+    
+    /**
+     * Turns the survey results into students
+     * @param survey the file containing
+     *      the responses to the survey
+     */
+    public void getResponses(String survey)
+    {
+        Scanner file = new Scanner(survey);
+        String responseLine = file.nextLine();
+        String[] titles = responseLine.split(",");
+        while (file.hasNextLine())
+        {
+            responseLine = file.nextLine();
+            String[] answers = responseLine.split(",");
+            int major = -1;
+            int region = -1;
+            int hobby = -1;
+            Student student;
+            if (answers[2].equals("Computer Science"))
+            {
+                major = 0;
+            }
+            else if (answers[2].equals("Other Engineering"))
+            {
+                major = 1;
+            }
+            else if (answers[2].equals("Other"))
+            {
+                major = 2;
+            }
+            else if (answers[2].equals("Math or CMDA"))
+            {
+                major = 3;
+            }
+            
+            if (answers[3].equals("Southeast"))
+            {
+                region = 0;
+            }
+            else if (answers[3].equals("Northeast"))
+            {
+                region = 1;
+            }
+            else if (answers[3].equals(
+                    "Outside of United States"))
+            {
+                region = 2;
+            }
+            else if (answers[3].contains("(other than"))
+            {
+                region = 3;
+            }
+            
+            if (answers[4].equals("sports"))
+            {
+                hobby = 0;
+            }
+            else if (answers[4].equals("music"))
+            {
+                hobby = 1;
+            }
+            else if (answers[4].equals("reading"))
+            {
+                hobby = 2;
+            }
+            else if (answers[4].equals("art"))
+            {
+                hobby = 3;
+            }
+            if (hobby != -1 && region != -1 && major != -1)
+            {
+                student = new Student(hobby, region, major);
+                for (int i = 5; i < answers.length; i += 2)
+                {
+                    String title;
+                    if (answers[i].equals("Yes"))
+                    {
+                        title = titles[i].split("\"")[2];
+                        int liked = 0;
+                        if (answers[i + 1].equals("yes"))
+                        {
+                            liked = 1;
+                        }
+                        student.addSongData(title, liked);
+                    }
+                } // end for loop
+                students.add(student);
+            }
+        } // end while loop
+        file.close();
+    }
+    
+    /**
+     * Returns the list of students
+     * @return the list of students
+     */
+    public AList<Student> getStudents()
+    {
+        return students;
+    }
+    
+    /**
+     * Creates glyphs and adds them to the list
+     * @param fileName The file of songs
+     */
+    public void createGlyphs(String fileName)
+    {
+        Scanner file = new Scanner(fileName);
+        file.nextLine();
+        while (file.hasNextLine())
+        {
+            String currentLine = file.nextLine();
+            String[] songInfo = currentLine.split(","); 
+            int numHeard = 0;
+            int numLiked = 0;
+            for (int i = 0; i < students.getLength(); i++)
+            {
+                AList<DataNode> answers = students.getEntry(i).getAnswers();
+                for (int j = 0; j < answers.getLength(); j++)
+                {
+                    if (answers.getEntry(j).getSong().equals(songInfo[0]))
+                    {
+                        numHeard++;
+                        numLiked += answers.getEntry(j).getLiked();
+                    }
+                } // end inner for loop through answers
+            } // end outer for loop through students
+            glyphs.add(new Glyph(songInfo[0], songInfo[1], songInfo[3], 
+                Integer.valueOf(songInfo[2]), numLiked, numHeard));
+        }
+        file.close();
+    }
+}

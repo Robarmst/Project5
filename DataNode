@@ -1,0 +1,44 @@
+/**
+ * 
+ */
+package prj5;
+
+/**
+ * @author Todd Parker (todd5913)
+ * @version 2015.11.19
+ *
+ */
+public class DataNode {
+    private String songName;
+    private int preference;
+    
+    /**
+     * Creates a DataNode for storage of individual opinions
+     * @param song The name of the song
+     * @param opinion 1 if liked, zero otherwise
+     */
+    public DataNode(String song, int opinion)
+    {
+        songName = song;
+        preference = opinion;
+    }
+    
+    /**
+     * Returns the binary value associated with the student's
+     * preference
+     * @return 1 if the student likes the song, zero otherwise
+     */
+    public int getLiked()
+    {
+        return preference;
+    }
+    
+    /**
+     * Returns the name of the song being reviewed
+     * @return The name of the song being reviewed
+     */
+    public String getSong()
+    {
+        return songName;
+    }
+}

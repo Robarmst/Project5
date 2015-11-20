@@ -1,0 +1,74 @@
+/**
+ * 
+ */
+package prj5;
+
+import list.AList;
+
+/**
+ * @author Todd Parker (todd5913)
+ * @version 2015.11.18
+ */
+public class Student {
+	private AList<DataNode> answers;
+	private int hobby;
+	private int region;
+	private int major;
+	
+	/**
+	 * Creates a student with initialized hobby
+	 * region, and major
+	 * @param passtime
+	 * @param location
+	 * @param focus
+	 */
+	public Student(int passtime, int location, int focus)
+	{
+	    answers = new AList<DataNode>();
+	    hobby = passtime;
+	    region = location;
+	    major = focus;
+	}
+	
+	/**
+	 * Returns the list of student answers
+	 * @return the list of student answers
+	 */
+	public AList<DataNode> getAnswers()
+	{
+	    return answers;
+	}
+	
+	/**
+	 * Returns the hobby of the student
+	 * @return the hobby of the student
+	 */
+	public int getHobby()
+	{
+	    return hobby;
+	}
+	
+	/**
+	 * returns the region of the student
+	 * @return the region of the student
+	 */
+	public int getRegion()
+	{
+	    return region;
+	}
+	
+	/**
+	 * Returns the major of the student
+	 * @return the major of the student
+	 */
+	public int getMajor()
+	{
+	    return major;
+	}
+	
+	public void addSongData(String song, int opinion)
+	{
+	    DataNode data = new DataNode(song, opinion);
+	    answers.add(data);
+	}
+}
