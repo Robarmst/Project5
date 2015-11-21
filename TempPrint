@@ -1,0 +1,28 @@
+// list is the glyphlist to print
+for (Glyph g : list)
+        {
+            //Not sure how to find these
+            int heardRead = 0; 
+            int heardArt = 0;
+            int heardSport = 0;
+            int heardMusic = 0;
+            int likeRead = 0;
+            int likeArt = 0;
+            int likeSport = 0;
+            int likeMusic = 0;
+            
+            System.out.println("Song Title: " + g.getSong());
+            System.out.println("Song Artist: " + g.getArtist());
+            System.out.println("Song Genre: " + g.getGenre());
+            System.out.println("Song Year: " + g.getYear());
+            System.out.println("Heard");
+            System.out.println("reading:" + heardRead 
+                    + " art:" + heardArt
+                    + " sport:" + heardSport
+                    + " music:" + heardMusic);
+            System.out.println("Likes");
+            System.out.println("reading:" + likeRead
+                    + " art:" + likeArt
+                    + " sport:" + likeSport
+                    + " music" + likeMusic + "\n");
+        }
