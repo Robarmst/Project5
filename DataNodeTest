@@ -1,0 +1,25 @@
+/**
+ * 
+ */
+package prj5;
+
+import student.TestCase;
+
+/**
+ * @author Todd Parker (todd5913)
+ * @version 2015.11.20
+ * Tests the methods implemented in the DataNode Class
+ */
+public class DataNodeTest extends TestCase {
+    private DataNode data;
+    
+    /**
+     * Tests that the only two methods work fine
+     */
+    public void testGetters()
+    {
+        data = new DataNode("Title", 2);
+        assertEquals(2, data.getLiked());
+        assertTrue(data.getSong().equals("Title"));
+    }
+}
