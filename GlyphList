@@ -280,7 +280,6 @@ public class GlyphList implements Iterable<Glyph>
      * @version 2015.11.18
      * 
      */
-    @SuppressWarnings("hiding")
     private class GlyphListIterator implements Iterator<Glyph>
     {
         private int index;
