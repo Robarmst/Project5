@@ -13,7 +13,7 @@ import list.AList;
  */
 public class Input {
     private AList<Student> students;
-    private GlyphList glyphs;
+    private static GlyphList glyphs;
     
     /**
      * Creates the input object
@@ -33,21 +33,39 @@ public class Input {
                 "Must have two files as input");
         }
         Input input = new Input();
-        input.getResponses(args[0]);
+        int[] totals = input.getResponses(args[0]);
         input.createGlyphs(args[1]);
-        GUISongWindow window = new GUISongwindow(glyphs);
+        @SuppressWarnings("unused")
+        GUISongWindow window = new GUISongWindow(glyphs, totals);
     }
     
     /**
      * Turns the survey results into students
      * @param survey the file containing
      *      the responses to the survey
+     * @return matrix filled with totals
      */
-    public void getResponses(String survey)
+    public int[] getResponses(String survey)
     {
         Scanner file = new Scanner(survey);
         String responseLine = file.nextLine();
         String[] titles = responseLine.split(",");
+        int[] totals = new int[12];
+        //h0, h1, h2, h3, m0, m1, m2, m3, r0, r1, r2, r3
+        int h0 = 0;
+        int h1 = 0;
+        int h2 = 0;
+        int h3 = 0;
+        
+        int m0 = 0;
+        int m1 = 0;
+        int m2 = 0;
+        int m3 = 0;
+        
+        int r0 = 0;
+        int r1 = 0;
+        int r2 = 0;
+        int r3 = 0;
         while (file.hasNextLine())
         {
             responseLine = file.nextLine();
@@ -110,6 +128,45 @@ public class Input {
             if (hobby != -1 && region != -1 && major != -1)
             {
                 student = new Student(hobby, region, major);
+                
+                if (student.getHobby() == 0) {
+                    h2++;
+                }
+                else if (student.getHobby() == 1) {
+                    h3++;
+                }
+                else if (student.getHobby() == 2) {
+                    h0++;
+                }
+                else if (student.getHobby() == 3) {
+                    h1++;
+                }
+                
+                if (student.getRegion() == 0) {
+                    r1++;
+                }
+                else if (student.getRegion() == 1) {
+                    r0++;
+                }
+                else if (student.getRegion() == 2) {
+                    r3++;
+                }
+                else if (student.getRegion() == 3) {
+                    r2++;
+                }
+                
+                if (student.getMajor() == 0) {
+                    m0++;
+                }
+                else if (student.getMajor() == 1) {
+                    m1++;
+                }
+                else if (student.getMajor() == 2) {
+                    m3++;
+                }
+                else if (student.getMajor() == 3) {
+                    m2++;
+                }
                 for (int i = 5; i < answers.length; i += 2)
                 {
                     String title;
@@ -128,6 +185,20 @@ public class Input {
             }
         } // end while loop
         file.close();
+        
+        totals[0] = h0;
+        totals[1] = h1;
+        totals[2] = h2;
+        totals[3] = h3;
+        totals[4] = m0;
+        totals[5] = m1;
+        totals[6] = m2;
+        totals[7] = m3;
+        totals[8] = r0;
+        totals[9] = r1;
+        totals[10] = r2;
+        totals[11] = r3;
+        return totals;
     }
     
     /**
@@ -151,8 +222,33 @@ public class Input {
         {
             String currentLine = file.nextLine();
             String[] songInfo = currentLine.split(","); 
-            int numHeard = 0;
-            int numLiked = 0;
+            int[] heard = new int[12];
+            int[] liked = new int[12];
+            int m0Heard = 0;
+            int m0Liked = 0;
+            int m1Heard = 0;
+            int m1Liked = 0;
+            int m2Heard = 0;
+            int m2Liked = 0;
+            int m3Heard = 0;
+            int m3Liked = 0;
+            int r0Heard = 0;
+            int r0Liked = 0;
+            int r1Heard = 0;
+            int r1Liked = 0;
+            int r2Heard = 0;
+            int r2Liked = 0;
+            int r3Heard = 0;
+            int r3Liked = 0;
+            int h0Heard = 0;
+            int h0Liked = 0;
+            int h1Heard = 0;
+            int h1Liked = 0;
+            int h2Heard = 0;
+            int h2Liked = 0;
+            int h3Heard = 0;
+            int h3Liked = 0;
+            
             for (int i = 0; i < students.getLength(); i++)
             {
                 AList<DataNode> answers = students.getEntry(i).getAnswers();
@@ -160,13 +256,87 @@ public class Input {
                 {
                     if (answers.getEntry(j).getSong().equals(songInfo[0]))
                     {
-                        numHeard++;
-                        numLiked += answers.getEntry(j).getLiked();
+                        if (students.getEntry(i).getHobby() == 0) {
+                            h2Heard++;
+                            h2Liked += answers.getEntry(j).getLiked();
+                        }
+                        else if (students.getEntry(i).getHobby() == 1) {
+                            h3Heard++;
+                            h3Liked += answers.getEntry(j).getLiked();
+                        }
+                        else if (students.getEntry(i).getHobby() == 2) {
+                            h0Heard++;
+                            h0Liked += answers.getEntry(j).getLiked();
+                        }
+                        else if (students.getEntry(i).getHobby() == 3) {
+                            h1Heard++;
+                            h1Liked += answers.getEntry(j).getLiked();
+                        }
+                        
+                        if (students.getEntry(i).getRegion() == 0) {
+                            r1Heard++;
+                            r1Liked += answers.getEntry(j).getLiked();
+                        }
+                        else if (students.getEntry(i).getRegion() == 1) {
+                            r0Heard++;
+                            r0Liked += answers.getEntry(j).getLiked();
+                        }
+                        else if (students.getEntry(i).getRegion() == 2) {
+                            r3Heard++;
+                            r3Liked += answers.getEntry(j).getLiked();
+                        }
+                        else if (students.getEntry(i).getRegion() == 3) {
+                            r2Heard++;
+                            r2Liked += answers.getEntry(j).getLiked();
+                        }
+                        
+                        if (students.getEntry(i).getMajor() == 0) {
+                            m0Heard++;
+                            m0Liked += answers.getEntry(j).getLiked();
+                        }
+                        else if (students.getEntry(i).getMajor() == 1) {
+                            m1Heard++;
+                            m1Liked += answers.getEntry(j).getLiked();
+                        }
+                        else if (students.getEntry(i).getMajor() == 2) {
+                            m3Heard++;
+                            m3Liked += answers.getEntry(j).getLiked();
+                        }
+                        else if (students.getEntry(i).getMajor() == 3) {
+                            m2Heard++;
+                            m2Liked += answers.getEntry(j).getLiked();
+                        } 
                     }
                 } // end inner for loop through answers
+                
             } // end outer for loop through students
+            heard[0] = h0Heard;
+            heard[1] = h1Heard;
+            heard[2] = h2Heard;
+            heard[3] = h3Heard;
+            heard[4] = m0Heard;
+            heard[5] = m1Heard;
+            heard[6] = m2Heard;
+            heard[7] = m3Heard;
+            heard[8] = r0Heard;
+            heard[9] = r1Heard;
+            heard[10] = r2Heard;
+            heard[11] = r3Heard;
+            
+            liked[0] = h0Liked;
+            liked[1] = h1Liked;
+            liked[2] = h2Liked;
+            liked[3] = h3Liked;
+            liked[4] = m0Liked;
+            liked[5] = m1Liked;
+            liked[6] = m2Liked;
+            liked[7] = m3Liked;
+            liked[8] = r0Liked;
+            liked[9] = r1Liked;
+            liked[10] = r2Liked;
+            liked[11] = r3Liked;
             glyphs.add(new Glyph(songInfo[0], songInfo[1], songInfo[3], 
-                Integer.valueOf(songInfo[2]), numLiked, numHeard));
+                Integer.valueOf(songInfo[2]), liked, heard));
         }
         file.close();
     }
