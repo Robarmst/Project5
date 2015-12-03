@@ -12,8 +12,32 @@ public class Glyph
     private String artist;
     private String genre;
     private int year;
-    private int likes;
-    private int listens;
+    private int m0Heard;
+    private int m0Liked;
+    private int m1Heard;
+    private int m1Liked;
+    private int m2Heard;
+    private int m2Liked;
+    private int m3Heard;
+    private int m3Liked;
+    private int r0Heard;
+    private int r0Liked;
+    private int r1Heard;
+    private int r1Liked;
+    private int r2Heard;
+    private int r2Liked;
+    private int r3Heard;
+    private int r3Liked;
+    private int h0Heard;
+    private int h0Liked;
+    private int h1Heard;
+    private int h1Liked;
+    private int h2Heard;
+    private int h2Liked;
+    private int h3Heard;
+    private int h3Liked;
+    private int[] Heard;
+    private int[] Likes;
     
     /**
      * Creates a new Glyph object with the given
@@ -26,14 +50,39 @@ public class Glyph
      * @param listens The number of listens it has
      */
     public Glyph(String song, String artist, String genre, 
-            int year, int likes, int listens)
+            int year, int[] likes, int[] listens)
     {
         this.song = song;
         this.artist = artist;
         this.genre = genre;
         this.year = year;
-        this.likes = likes;
-        this.listens = listens;
+        setHeard(listens);
+        setLikes(likes);
+        h0Heard = listens[0];
+        h1Heard = listens[1];
+        h2Heard = listens[2];
+        h3Heard = listens[3];
+        m0Heard = listens[4];
+        m1Heard = listens[5];
+        m2Heard = listens[6];
+        m3Heard = listens[7];
+        r0Heard = listens[8];
+        r1Heard = listens[9];
+        r2Heard = listens[10];
+        r3Heard = listens[11];
+        
+        h0Liked = likes[0];
+        h1Liked = likes[1];
+        h2Liked = likes[2];
+        h3Liked = likes[3];
+        m0Liked = likes[4];
+        m1Liked = likes[5];
+        m2Liked = likes[6];
+        m3Liked = likes[7];
+        r0Liked = likes[8];
+        r1Liked = likes[9];
+        r2Liked = likes[10];
+        r3Liked = likes[11];
     }
     
     /**
@@ -71,25 +120,7 @@ public class Glyph
     {
         return year;
     }
-    
-    /**
-     * Retrieves the likes of the glyph.
-     * @return the likes
-     */
-    public int getLikes()
-    {
-        return likes; 
-    }
-    
-    /**
-     * Retrieves the listens of the glyph.
-     * @return the listens
-     */
-    public int getListens()
-    {
-        return listens;
-    }
-    
+     
     /**
      * Return the glyph in a textual form
      * @return the glyph in a textual format
@@ -101,8 +132,30 @@ public class Glyph
                 + artist + ", "
                 + genre + ", "
                 + year + ", "
-                + likes + ", "
-                + listens + "]";
+                + h0Liked + ", "
+                + h1Liked + ", "
+                + h2Liked + ", "
+                + h3Liked + ", "
+                + m0Liked + ", "
+                + m1Liked + ", "
+                + m2Liked + ", "
+                + m3Liked + ", "
+                + r0Liked + ", "
+                + r1Liked + ", "
+                + r2Liked + ", "
+                + r3Liked + ", "
+                + h0Heard + ", "
+                + h1Heard + ", "
+                + h2Heard + ", "
+                + h3Heard + ", "
+                + m0Heard + ", "
+                + m1Heard + ", "
+                + m2Heard + ", "
+                + m3Heard + ", "
+                + r0Heard + ", "
+                + r1Heard + ", "
+                + r2Heard + ", "
+                + r3Heard + "]";
     }
     
     /**
@@ -147,11 +200,123 @@ public class Glyph
             return false;
         }
         
-        if (((Glyph) other).getListens() != this.getListens())
+        if (((Glyph) other).getHeard() != this.getHeard())
         {
             return false;
         }
         
         return ((Glyph) other).getYear() == this.getYear();
+    }
+
+    public int getM0Heard() {
+        return m0Heard;
+    }
+
+    public int getM0Liked() {
+        return m0Liked;
+    }
+
+    public int getM1Heard() {
+        return m1Heard;
+    }
+
+    public int getM1Liked() {
+        return m1Liked;
+    }
+
+    public int getM2Heard() {
+        return m2Heard;
+    }
+
+    public int getM2Liked() {
+        return m2Liked;
+    }
+
+    public int getM3Heard() {
+        return m3Heard;
+    }
+
+    public int getM3Liked() {
+        return m3Liked;
+    }
+
+    public int getR0Heard() {
+        return r0Heard;
+    }
+
+    public int getR0Liked() {
+        return r0Liked;
+    }
+
+    public int getR1Heard() {
+        return r1Heard;
+    }
+
+    public int getR1Liked() {
+        return r1Liked;
+    }
+
+    public int getR2Heard() {
+        return r2Heard;
+    }
+
+    public int getR2Liked() {
+        return r2Liked;
+    }
+
+    public int getR3Heard() {
+        return r3Heard;
+    }
+
+    public int getR3Liked() {
+        return r3Liked;
+    }
+
+    public int getH0Heard() {
+        return h0Heard;
+    }
+
+    public int getH0Liked() {
+        return h0Liked;
+    }
+
+    public int getH1Heard() {
+        return h1Heard;
+    }
+
+    public int getH1Liked() {
+        return h1Liked;
+    }
+
+    public int getH2Heard() {
+        return h2Heard;
+    }
+
+    public int getH2Liked() {
+        return h2Liked;
+    }
+
+    public int getH3Heard() {
+        return h3Heard;
+    }
+
+    public int getH3Liked() {
+        return h3Liked;
+    }
+
+    public int[] getHeard() {
+        return Heard;
+    }
+
+    public void setHeard(int[] heard) {
+        Heard = heard;
+    }
+
+    public int[] getLikes() {
+        return Likes;
+    }
+
+    public void setLikes(int[] likes) {
+        Likes = likes;
     }
 }
