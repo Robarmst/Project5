@@ -247,19 +247,19 @@ public class DLList<T>
      * @author Aidan Barton (tonaid)
      * @version 2015.11.18
      *
-     * @param <T> generic data type
+     * @param <G> generic data type
      */
-    private class Node<T>
+    private class Node<G>
     {
-        private Node<T> next;
-        private Node<T> previous;
-        private T data;
+        private Node<G> next;
+        private Node<G> previous;
+        private G data;
         
         /**
          * Creates a new node object
          * @param data The data contained in the node
          */
-        public Node(T data)
+        public Node(G data)
         {
             next = null;
             previous = null;
@@ -270,7 +270,7 @@ public class DLList<T>
          * Set the given node to this nodes next
          * @param newNext the node to set as next
          */
-        public void setNext(Node<T> newNext)
+        public void setNext(Node<G> newNext)
         {
             next = newNext;
         }
@@ -279,7 +279,7 @@ public class DLList<T>
          * Set the given node to this nodes previous
          * @param newPrevious The node to be set as the previous
          */
-        public void setPrevious(Node<T> newPrevious)
+        public void setPrevious(Node<G> newPrevious)
         {
             previous = newPrevious;
         }
@@ -288,7 +288,7 @@ public class DLList<T>
          * Gets the next node in the chain
          * @return the next node
          */
-        public Node<T> next()
+        public Node<G> next()
         {
             return next;
         }
@@ -297,7 +297,7 @@ public class DLList<T>
          * Gets the previous node in the chain
          * @return the previous node
          */
-        public Node<T> previous()
+        public Node<G> previous()
         {
             return previous;
         }
@@ -306,7 +306,7 @@ public class DLList<T>
          * Gets the data in the node
          * @return the data in the node
          */
-        public T data()
+        public G data()
         {
             return data;
         }
@@ -315,7 +315,8 @@ public class DLList<T>
          * Sets this nodes data to the given data
          * @param newData is the data to set to
          */
-        public void setData(T newData)
+        @SuppressWarnings("unused")
+        public void setData(G newData)
         {
             data = newData;
         }
