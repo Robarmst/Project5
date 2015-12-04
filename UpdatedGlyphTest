@@ -1,0 +1,180 @@
+package prj5;
+
+import student.TestCase;
+
+/**
+ * @author Aidan Barton tonaid
+ * @version 2015.11.18
+ * Test the glyph class
+ */
+public class GlyphTest extends TestCase
+{
+    private Glyph glyph;
+    private Glyph sameGlyph;
+    private Glyph listenGlyph;
+    private Glyph likesGlyph;
+    private Glyph artistGlyph;
+    private Glyph songGlyph;
+    private Glyph genreGlyph;
+    private Glyph yearGlyph;
+    
+    /**
+     * Set up the test conditions
+     */
+    public void setUp()
+    {
+        int[] likes = {1,2,3,4,5,6,7,8,9,10,11,12};
+        int[] listens = {1,2,3,4,5,6,7,8,9,10,11,12};
+        glyph = new Glyph("song", "artist", "genre", 66, likes, listens);
+        sameGlyph = new Glyph("song", "artist", "genre", 66, likes, listens);
+        listenGlyph = new Glyph("song", "artist", "genre", 166, likes, listens);
+        likesGlyph = new Glyph("song", "artist", "genre", 366, likes, listens);
+        artistGlyph = new Glyph("song", "ast", "genre", 466, likes, listens);
+        songGlyph = new Glyph("sg", "artist", "genre", 566, likes, listens);
+        genreGlyph = new Glyph("song", "artist", "gee", 766, likes, listens);
+        yearGlyph = new Glyph("song", "artist", "genre", 6, likes, listens);
+    }
+    
+    /**
+     * test the getSong method
+     * should return song
+     */
+    public void testGetSong()
+    {
+        assertEquals("song", glyph.getSong());
+    }
+    
+    /**
+     * test the getArtist method
+     * should return artist
+     */
+    public void testGetArtist()
+    {
+        assertEquals("artist", glyph.getArtist());
+    }
+    
+    /**
+     * test the getgenre method
+     * should return genre
+     */
+    public void testGetGenre()
+    {
+        assertEquals("genre", glyph.getGenre());
+    }
+    
+    /**
+     * test the getYear method
+     * should return the year
+     */
+    public void testGetYear()
+    {
+        assertEquals(66, glyph.getYear());
+    }
+    
+    /**
+     * test the get likes method
+     * should return the likes
+     */
+    public void testGetLikesHMR()
+    {
+        assertEquals(1, glyph.getH0Liked());
+        assertEquals(2, glyph.getH1Liked());
+        assertEquals(3, glyph.getH2Liked());
+        assertEquals(4, glyph.getH3Liked());
+        
+        assertEquals(5, glyph.getM0Liked());
+        assertEquals(6, glyph.getM1Liked());
+        assertEquals(7, glyph.getM2Liked());
+        assertEquals(8, glyph.getM3Liked());
+        
+        assertEquals(9, glyph.getR0Liked());
+        assertEquals(10, glyph.getR1Liked());
+        assertEquals(11, glyph.getR2Liked());
+        assertEquals(12, glyph.getR3Liked());
+    }
+    
+    /**
+     * test the getListens method
+     * should return the listens
+     */
+    public void testGetHeardHMR()
+    {
+        assertEquals(1, glyph.getH0Heard());
+        assertEquals(2, glyph.getH1Heard());
+        assertEquals(3, glyph.getH2Heard());
+        assertEquals(4, glyph.getH3Heard());
+        
+        assertEquals(5, glyph.getM0Heard());
+        assertEquals(6, glyph.getM1Heard());
+        assertEquals(7, glyph.getM2Heard());
+        assertEquals(8, glyph.getM3Heard());
+        
+        assertEquals(9, glyph.getR0Heard());
+        assertEquals(10, glyph.getR1Heard());
+        assertEquals(11, glyph.getR2Heard());
+        assertEquals(12, glyph.getR3Heard());
+    }
+    
+    
+    
+    /**
+     * test the toString method
+     * should return the glyph in textual form
+     */
+    public void testToString()
+    {
+        assertEquals("[song, artist, genre, "
+                + "66, 1, 2, 3, 4, 5, 6, 7, 8,"
+                + " 9, 10, 11, 12, 1, 2, 3, 4,"
+                + " 5, 6, 7, 8, 9, 10, 11, 12]", 
+                glyph.toString());
+    }
+    
+    /**
+     * test the equals method
+     * should determine if two objects are equals
+     */
+    public void testEquals()
+    {
+        int whhhhhat = 69420;
+        String nullStr = null;
+        assertTrue(glyph.equals(glyph));
+        assertTrue(glyph.equals(sameGlyph));
+        assertFalse(glyph.equals(nullStr));
+        assertFalse(glyph.equals(whhhhhat));
+        assertFalse(glyph.equals(artistGlyph));
+        assertFalse(glyph.equals(songGlyph));
+        assertFalse(glyph.equals(genreGlyph));
+        assertFalse(glyph.equals(yearGlyph));
+        assertFalse(glyph.equals(likesGlyph));
+        assertFalse(glyph.equals(listenGlyph));
+    }
+    
+    /**
+     * test the getHeard method
+     * should return the listens
+     */
+    public void testGetHeard()
+    {
+        int[] test = glyph.getHeard();
+        
+        for (int i = 0; i < 12; i++)
+        {
+            assertEquals(i + 1, test[i]);
+        }
+    }
+    
+    /**
+     * test the getLikes method
+     * should return the likes
+     */
+    public void testGetLikes()
+    {
+        int[] test = glyph.getLikes();
+        
+        for (int i = 0; i < 12; i++)
+        {
+            assertEquals(i + 1, test[i]);
+        }
+    }
+}
