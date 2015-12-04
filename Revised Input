@@ -15,7 +15,7 @@ import list.AList;
  */
 public class Input {
     private AList<Student> students;
-    private static GlyphList glyphs;
+    private GlyphList glyphs;
     
     /**
      * Creates the input object
@@ -39,8 +39,9 @@ public class Input {
         Input input = new Input();
         int[] totals = input.getResponses(args[0]);
         input.createGlyphs(args[1]);
-        //@SuppressWarnings("unused")
-        //GUISongWindow window = new GUISongWindow(glyphs, totals);
+        int stop = 1;
+        @SuppressWarnings("unused")
+        GUISongWindow window = new GUISongWindow(glyphs, totals);
     }
     
     /**
@@ -75,6 +76,10 @@ public class Input {
         {
             responseLine = file.nextLine();
             String[] answers = responseLine.split(",");
+            if (answers.length < 5)
+            {
+                continue;
+            }
             int major = -1;
             int region = -1;
             int hobby = -1;
@@ -173,12 +178,11 @@ public class Input {
                     m2++;
                 }
                 int j = 8;
-                for (int i = 5; i < answers.length; i += 2)
+                for (int i = 5; i < answers.length - 1; i += 2)
                 {
                     String title;
                     if (answers[i].equals("Yes"))
                     {
-                        String check = titles[j];
                         title = titles[j].split("\"\"")[1];
                         int liked = 0;
                         if (answers[i + 1].equals("Yes"))
@@ -230,7 +234,7 @@ public class Input {
         while (file.hasNextLine())
         {
             String currentLine = file.nextLine();
-            String[] songInfo = currentLine.split(", "); 
+            String[] songInfo = currentLine.split(","); 
             int[] heard = new int[12];
             int[] liked = new int[12];
             int m0Heard = 0;
